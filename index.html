@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA | 3D Gesture Visualizer</title>
+    
+    <!-- Design Assets -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+</head>
+<body>
+
+    <!-- Landing Screen -->
+    <div id="landing-screen">
+        <div class="intro-logo">NEBULA</div>
+        <button id="init-btn">Initialize System</button>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="hud-overlay">
+        <!-- Top Section -->
+        <div class="header">
+            <div class="system-title">
+                NEBULA <span>v2.0 // GESTURE_VISUALIZER</span>
+            </div>
+            
+            <div id="video-container">
+                <video id="video-feed" playsinline></video>
+                <div class="video-scanline"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="footer">
+            <div class="status-panel">
+                <div class="status-header">
+                    <span>SYSTEM_STATUS</span>
+                    <span id="timestamp"></span>
+                </div>
+                <div id="status-value" class="status-value">STANDBY</div>
+                
+                <ul class="gestures-list">
+                    <li class="gesture-item active" data-shape="sphere">
+                        <span>1 FINGER</span>
+                        <span>SPHERE.EXE</span>
+                    </li>
+                    <li class="gesture-item" data-shape="heart">
+                        <span>2 FINGERS</span>
+                        <span>CORE_HEART</span>
+                    </li>
+                    <li class="gesture-item" data-shape="flower">
+                        <span>3 FINGERS</span>
+                        <span>BIO_FLOWER</span>
+                    </li>
+                    <li class="gesture-item" data-shape="saturn">
+                        <span>4 FINGERS</span>
+                        <span>CELESTIAL_RING</span>
+                    </li>
+                    <li class="gesture-item" data-shape="fireworks">
+                        <span>5 FINGERS</span>
+                        <span>NOVA_BURST</span>
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 15px; font-size: 0.7rem; opacity: 0.4; font-family: monospace;">
+                    PINCH TIPS TO PULSE
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Logic -->
+    <script src="app.js"></script>
+    <script>
+        // HUD Clock
+        const timeEl = document.getElementById('timestamp');
+        setInterval(() => {
+            const now = new Date();
+            timeEl.innerText = now.getHours().toString().padStart(2, '0') + ":" + 
+                              now.getMinutes().toString().padStart(2, '0') + ":" + 
+                              now.getSeconds().toString().padStart(2, '0');
+        }, 1000);
+    </script>
+</body>
+</html>
